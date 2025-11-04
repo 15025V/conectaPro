@@ -3,6 +3,7 @@ interface CardProps {
   specialty: string
   description: string
   imageUrl: string
+  
 }
 
 export default function Card({ name, specialty, description, imageUrl }: CardProps) {

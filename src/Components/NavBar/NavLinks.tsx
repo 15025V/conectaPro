@@ -1,9 +1,19 @@
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from "../../context/AuthContext" 
 
 interface NavLinksProps {
   isOpen: boolean
 }
 
 export default function NavLinks({ isOpen }: NavLinksProps) {
+  const { isAuthenticated, rol, logout } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    navigate("/")
+  }
+
   return (
     <nav
       className={`text-sm font-medium
@@ -11,9 +21,26 @@ export default function NavLinks({ isOpen }: NavLinksProps) {
         md:static md:flex md:flex-row md:justify-end md:gap-6 md:py-0 md:px-0 md:bg-transparent
         ${isOpen ? 'flex' : 'hidden'}`}
     >
-      <a href="/" className="text-[#1EBE91]">Home</a>
-      <a href="/Formulario" className="hover:text-[#1EBE91] transition">About</a>
-      <a href="#contact" className="hover:text-[#1EBE91] transition">Contact</a>
+      <Link to="#" className="text-[#1EBE91]">Inicio</Link>
+
+      {isAuthenticated && rol === "usuario" && (
+        <Link to="/home" className="hover:text-[#1EBE91] transition">Mi perfil</Link>
+      )}
+
+      {isAuthenticated && rol === "admin" && (
+        <Link to="/dashboard" className="hover:text-[#1EBE91] transition">Panel admin</Link>
+      )}
+
+      {isAuthenticated ? (
+        <button
+          onClick={handleLogout}
+          className="text-red-600 hover:underline transition"
+        >
+          Cerrar sesión
+        </button>
+      ) : (
+        <Link to="/register" className="hover:text-[#1EBE91] transition">Registrarse</Link>
+      )}
     </nav>
   )
 }

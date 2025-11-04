@@ -3,9 +3,11 @@ import axios from "axios"
 import { useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
 
-export default function Login() {
+export default function Register() {
+  const [nombre, setNombre] = useState("")
   const [correo, setCorreo] = useState("")
   const [password, setPassword] = useState("")
+  const [rol, setRol] = useState("usuario")
   const [error, setError] = useState("")
   const navigate = useNavigate()
   const { login } = useAuth()
@@ -15,21 +17,29 @@ export default function Login() {
     setError("")
 
     try {
-      const res = await axios.post("http://localhost:3000/api/auth/login", {
+      await axios.post("http://localhost:3000/api/auth/register", {
+        nombre,
+        correo,
+        password,
+        rol
+      })
+
+      // login automático
+      const loginRes = await axios.post("http://localhost:3000/api/auth/login", {
         correo,
         password
       })
 
-      const token = res.data.token
+      const token = loginRes.data.token
       const decoded = JSON.parse(atob(token.split(".")[1]))
 
       login(token)
 
       if (decoded.rol === "admin") navigate("/dashboard")
       else navigate("/home")
-      
+
     } catch (err: any) {
-      setError(err.response?.data?.error || "Error al iniciar sesión")
+      setError(err.response?.data?.error || "Error al registrar")
     }
   }
 
@@ -40,11 +50,24 @@ export default function Login() {
         className="w-full max-w-md bg-white shadow-xl rounded-xl p-8 space-y-6 border border-gray-200"
       >
         <h2 className="text-3xl font-bold text-center text-blue-700">
-          Iniciar sesión
+          Crear cuenta
         </h2>
         <p className="text-center text-gray-600">
-          Bienvenido de nuevo
+          Regístrate para continuar
         </p>
+
+        {/* Nombre */}
+        <div className="space-y-1">
+          <label className="text-sm font-medium text-gray-700">Nombre</label>
+          <input
+            type="text"
+            placeholder="Tu nombre completo"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            required
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          />
+        </div>
 
         {/* Correo */}
         <div className="space-y-1">
@@ -72,6 +95,19 @@ export default function Login() {
           />
         </div>
 
+        {/* Rol */}
+        <div className="space-y-1">
+          <label className="text-sm font-medium text-gray-700">Rol</label>
+          <select
+            value={rol}
+            onChange={(e) => setRol(e.target.value)}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+          >
+            <option value="usuario">Usuario</option>
+            <option value="admin">Administrador</option>
+          </select>
+        </div>
+
         {/* Error */}
         {error && (
           <p className="text-red-600 text-center font-medium">{error}</p>
@@ -82,16 +118,16 @@ export default function Login() {
           type="submit"
           className="w-full bg-blue-600 text-white py-3 rounded-lg text-lg font-semibold hover:bg-blue-700 transition-all duration-300"
         >
-          Entrar
+          Registrarse
         </button>
 
         {/* Botón secundario */}
         <button
           type="button"
-          onClick={() => navigate("/register")}
+          onClick={() => navigate("/")}
           className="w-full text-blue-600 font-medium text-center hover:underline"
         >
-          ¿No tienes cuenta? Regístrate
+          ¿Ya tienes cuenta? Inicia sesión
         </button>
       </form>
     </div>
