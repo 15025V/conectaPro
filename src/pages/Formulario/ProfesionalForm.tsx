@@ -1,40 +1,41 @@
 import { useState } from "react"
 
 const categorias = [
-  "Psicología",
-  "Diseño gráfico",
   "Desarrollo web",
+  "Diseño gráfico",
   "Marketing digital",
-  "Fotografía",
-  "Contabilidad",
-  "Educación",
+  "Psicología",
   "Nutrición",
-  "Arquitectura",
-  "Ingeniería civil",
-  "Traducción",
-  "Redacción y copywriting",
-  "Desarrollo de software",
+  "Contabilidad y finanzas",
+  "Educación y tutoría",
+  "Fotografía",
+  "Producción audiovisual",
+  "Entrenamiento físico",
   "Consultoría legal",
-  "Gestión de proyectos"
+  "Arquitectura",
+  "Ingeniería",
+  "Idiomas",
+  "Programación y software"
 ]
 
-const categoriaMap = {
-  "Psicología": 1,
+const categoriaMap: Record<string, number> = {
+  "Desarrollo web": 1,
   "Diseño gráfico": 2,
-  "Desarrollo web": 3,
-  "Marketing digital": 4,
-  "Fotografía": 5,
-  "Contabilidad": 6,
-  "Educación": 7,
-  "Nutrición": 8,
-  "Arquitectura": 9,
-  "Ingeniería civil": 10,
-  "Traducción": 11,
-  "Redacción y copywriting": 12,
-  "Desarrollo de software": 13,
-  "Consultoría legal": 14,
-  "Gestión de proyectos": 15
+  "Marketing digital": 3,
+  "Psicología": 4,
+  "Nutrición": 5,
+  "Contabilidad y finanzas": 6,
+  "Educación y tutoría": 7,
+  "Fotografía": 8,
+  "Producción audiovisual": 9,
+  "Entrenamiento físico": 10,
+  "Consultoría legal": 11,
+  "Arquitectura": 12,
+  "Ingeniería": 13,
+  "Idiomas": 14,
+  "Programación y software": 15
 }
+
 
 export default function ProfesionalForm() {
   const [formData, setFormData] = useState({

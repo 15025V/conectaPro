@@ -43,16 +43,17 @@ export default function ProfesionalContent() {
       })
   }
 
-  // ✅ Primero load normal
+  // Primero load normal
   useEffect(() => {
     loadProfessionals()
   }, [])
 
-  // ✅ Luego actualiza instantáneamente cuando hay cambios
+  // Se actualiza instantáneamente cuando hay cambios
   useEffect(() => {
-    setLoading(true)      // ✅ Esto hace que se vea instantáneo
+    setLoading(true)      //  Esto hace que se vea instantáneo
     loadProfessionals()
   }, [reloadFlag])
+  // tengo que ver por que no funciona por el momento:
 
   const totalPages = Math.ceil(professionals.length / PAGE_SIZE)
   const startIndex = (currentPage - 1) * PAGE_SIZE

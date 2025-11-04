@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [token, setToken] = useState<string | null>(null);
   const [rol, setRol] = useState<string | null>(null);
 
-  // ✅ Cargar token SOLO si es válido
+  //  Cargar token SOLO si es válido
   useEffect(() => {
     const storedToken = localStorage.getItem("token");
 
@@ -24,10 +24,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
-  // ✅ Login seguro (NO hacer logout si el token viene mal)
+  //  Login seguro (NO hacer logout si el token viene mal)
   const login = (newToken: string) => {
     if (!newToken || newToken.split(".").length !== 3) {
-      console.warn("⚠️ Token inválido recibido");
+      console.warn(" Token inválido recibido");
       return;
     }
 
@@ -41,7 +41,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       setToken(newToken);
       setRol(userRole);
     } catch (err) {
-      console.error("❌ Error al decodificar token:", err);
+      console.error(" Error al decodificar token:", err);
     }
   };
 

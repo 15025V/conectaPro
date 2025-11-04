@@ -1,5 +1,6 @@
 import { Navigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext"
+import type { JSX } from "react"
 
 type ProtectedRouteProps = {
   children: JSX.Element
@@ -10,6 +11,7 @@ export default function ProtectedRoute({ children, requiredRole }: ProtectedRout
   const { isAuthenticated, rol, loading } = useAuth()
 
   // Espera a que el contexto termine de cargar antes de decidir
+  // A corregir Todavia😢
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">

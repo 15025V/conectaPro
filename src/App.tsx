@@ -4,14 +4,14 @@ import Home from "./pages/Home"
 import ProtectedRoute from "./Components/ProtectedRoute"
 import AdminDashboard from "./pages/AdminDashboard/AdminDashboard"
 import Register from "./pages/Register"
-import { ReloadProvider } from "./context/ReloadContext"   // ✅ IMPORTANTE
+import { ReloadProvider } from "./context/ReloadContext"   
 
 function App() {
   return (
-    <ReloadProvider>     {/* ✅ ENVUELVE TODA TU APP */}
+    <ReloadProvider>    // Por checar 
       <BrowserRouter>
 
-        <Routes>
+        <Routes> //Proteger rutas
           <Route path="/" element={<Login />} />
           <Route path="/Register" element={<Register />} />
 
@@ -32,7 +32,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-
+          {/* Si es que llega a buscar otras rutas */}
           <Route
             path="*"
             element={<div className="text-center p-10">Página no encontrada</div>}

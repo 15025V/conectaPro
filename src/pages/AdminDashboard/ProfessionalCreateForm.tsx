@@ -16,17 +16,17 @@ export default function ProfessionalForm() {
   useEffect(() => {
     axios.get("http://localhost:3000/api/categories")
       .then((res) => setCategorias(res.data))
-      .catch(() => setMensaje("❌ No se pudieron cargar las categorías"))
+      .catch(() => setMensaje(" No se pudieron cargar las categorías"))
   }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setMensaje("")
 
-    // ✅ Validar token antes del POST
+    //  Validar token antes del POST
     const token = localStorage.getItem("token")
     if (!token || token === "null" || token === "undefined") {
-      setMensaje("❌ No hay sesión activa. Inicia sesión nuevamente.")
+      setMensaje(" No hay sesión activa. Inicia sesión nuevamente.")
       return
     }
 
@@ -50,7 +50,7 @@ export default function ProfessionalForm() {
         }
       )
 
-      setMensaje("✅ Profesional agregado correctamente")
+      setMensaje(" Profesional agregado correctamente")
       setNombre("")
       setModalidad("")
       setCategoriaId("")
@@ -62,7 +62,7 @@ export default function ProfessionalForm() {
 
     } catch (err: any) {
       console.error("Error al agregar profesional:", err)
-      setMensaje(err.response?.data?.error || "❌ Error al agregar profesional")
+      setMensaje(err.response?.data?.error || " Error al agregar profesional")
     }
   }
 
