@@ -23,7 +23,34 @@ cd frontend
 npm install
 npm run dev
 
-cd ../backend
-npm install
-npx prisma migrate dev
-npm run dev
+```
+
+## 📁 Estructura del proyecto
+```plaintext
+└── src/
+    ├── App.tsx
+    ├── main.tsx
+    ├── Components/
+    │   ├── ProtectedRoute.tsx
+    │   ├── Buttons/
+    │   ├── Card/
+    │   ├── CheckList/
+    │   ├── Footer/
+    │   ├── NavBar/
+    │   ├── Pagination/
+    │   ├── Sections/
+    │   └── Split/
+    ├── context/
+    └── pages/
+        ├── Home.tsx
+        ├── Login.tsx
+        ├── Register.tsx
+        ├── AdminDashboard/
+        └── Formulario/
+```
+# 🛠️ Herramientas utilizadas
+Frontend: React, Vite, TailwindCSS, React Router
+
+Backend: Express, Prisma, PostgreSQL, JWT
+
+Dev Tools: Postman, GitHub
